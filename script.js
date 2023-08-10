@@ -1,5 +1,6 @@
 let isDrawing = false;
-
+let selectedColor = "#000000";
+let backgroundColor = "#F9F9F9";
 function createElements(size) {
   let container = document.querySelector(".draw-container");
   for (let i = 0; i < size ** 2; i++) {
@@ -14,14 +15,14 @@ function createListenersElements() {
   let elements = document.querySelectorAll(".element");
   elements.forEach((element) => {
     element.addEventListener("mouseover", (elem) => {
-      if (isDrawing) elem.currentTarget.classList.add("selected");
+      if (isDrawing) elem.currentTarget.style.backgroundColor = selectedColor;
       else elem.currentTarget.classList.add("hover");
     });
     element.addEventListener("mouseout", (elem) => {
       elem.currentTarget.classList.remove("hover");
     });
     element.addEventListener("mousedown", (elem) => {
-      elem.currentTarget.classList.toggle("selected");
+      elem.currentTarget.style.backgroundColor = selectedColor;
       elem.currentTarget.classList.remove("hover");
     });
   });
@@ -53,10 +54,25 @@ function addSliderListener() {
   });
 }
 
+function createColorPickerListener() {
+  const colorPickerTrigger = document.querySelector(".color-picker-button");
+  const colorPicker = document.getElementById('color-picker');
+
+  colorPickerTrigger.addEventListener('click', () => {
+    colorPicker.click(); // Simulate a click on the hidden color picker input
+  });
+
+  colorPicker.addEventListener('input', (event) => {
+    selectedColor = event.target.value;
+    colorPickerTrigger.style.backgroundColor = selectedColor;
+  });
+}
+
 function main() {
   const SIZE = 16;
   createNewBoard(SIZE);
   addSliderListener();
+  createColorPickerListener();
 }
 
 main();
