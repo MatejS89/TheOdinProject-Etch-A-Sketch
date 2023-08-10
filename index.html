@@ -9,7 +9,14 @@
   <body>
     <div class="header">Etch-A-Sketch</div>
     <div class="container">
-      <div class="settings-container"><div class="settings-header">Settings</div></div>
+      <div class="settings-container">
+        <div class="settings-header">Settings</div>
+        <div class="slider-container">
+          <label for="slider"></label>
+          <input id="slider" max="100" min="1" type="range" value="16" />
+          <p id="rangeValue">16</p>
+        </div>
+      </div>
       <div class="draw-container"></div>
     </div>
   </body>
