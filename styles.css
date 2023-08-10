@@ -7,27 +7,48 @@ body {
 
 .header {
   margin: auto;
-	width: 50%;
   padding: 2rem;
   text-align: center;
+  width: 50%;
 }
 
 .container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  min-width: 50%;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  border: black solid 3px;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+.settings-header {
+  font-size: 2.7rem;
+  padding: 0.7rem 3rem;
+  background-color: #8aa6cf;
+  border-radius: 10px;
+}
+
+.draw-container {
   border: black solid 3px;
   display: flex;
   flex-wrap: wrap;
   height: 500px;
-  margin: auto;
   width: 500px;
 }
 
 .element {
-	box-sizing: border-box;
-  user-select: none;
-  -moz-user-select: none;
+  box-sizing: border-box;
   -webkit-user-drag: none;
-  -webkit-user-select: none;
+  -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .element.hover {
