@@ -49,7 +49,7 @@ function addSliderListener() {
   slider.addEventListener("input", () => {
     const currVal = slider.value;
     const display = document.querySelector("#rangeValue");
-    display.innerText = currVal;
+    display.innerText = `${currVal} x ${currVal}`;
   });
 }
 
