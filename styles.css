@@ -1,0 +1,27 @@
+body {
+  font-family: sans-serif;
+  font-size: 4rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header {
+  margin: auto;
+	width: 50%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container {
+  border: darkgrey solid 3px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 500px;
+  margin: auto;
+  width: 500px;
+}
+
+.element {
+  border: black solid 1px;
+	box-sizing: border-box;
+}
