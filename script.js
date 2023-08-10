@@ -1,3 +1,5 @@
+let isDrawing = false;
+
 function createElements(size) {
   let container = document.querySelector(".draw-container");
   for (let i = 0; i < size ** 2; i++) {
@@ -12,19 +14,27 @@ function createListenersElements() {
   let elements = document.querySelectorAll(".element");
   elements.forEach((element) => {
     element.addEventListener("mouseover", (elem) => {
-      elem.currentTarget.classList.toggle("hover");
+      if (isDrawing) elem.currentTarget.classList.add("selected");
+      else elem.currentTarget.classList.add("hover");
     });
     element.addEventListener("mouseout", (elem) => {
-      elem.currentTarget.classList.toggle("hover");
+      elem.currentTarget.classList.remove("hover");
     });
-    element.addEventListener("click", (elem) => {
+    element.addEventListener("mousedown", (elem) => {
       elem.currentTarget.classList.toggle("selected");
+      elem.currentTarget.classList.remove("hover");
     });
   });
 }
 
 function createNewBoard(size) {
   let container = document.querySelector(".draw-container");
+  container.addEventListener("mouseup", () => {
+    isDrawing = false;
+  });
+  container.addEventListener("mousedown", () => {
+    isDrawing = true;
+  });
   container.innerHTML = "";
   createElements(size);
   createListenersElements();
