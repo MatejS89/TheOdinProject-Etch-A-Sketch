@@ -19,8 +19,11 @@ body {
   min-width: 50%;
 }
 
+.container > * {
+  box-shadow: 10px 10px 43px #bebebe, -10px -10px 43px #ffffff;
+}
+
 .settings-container {
-  border: black solid 3px;
   border-radius: 14px;
   box-sizing: border-box;
   display: flex;
@@ -29,18 +32,22 @@ body {
 }
 
 .settings-header {
-  background-color: #8aa6cf;
+  background-color: #e0e0e0;
   border-radius: 10px;
   font-size: 2.7rem;
   padding: 0.7rem 3rem;
 }
 
-#slider {
-  font-size: 0;
+#rangeValue {
+  font-size: 30px;
+  margin: 0;
+}
+
+.slider-container {
+  font-size: 2rem;
 }
 
 .draw-container {
-  border: black solid 3px;
   display: flex;
   flex-wrap: wrap;
   height: 500px;
@@ -62,13 +69,4 @@ body {
 
 .element.selected {
   background-color: black;
-}
-
-#rangeValue {
-  font-size: 30px;
-  margin: 0;
-}
-
-.slider-container {
-  font-size: 0;
 }
