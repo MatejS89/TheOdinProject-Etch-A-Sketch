@@ -7,6 +7,20 @@ function main() {
     element.style.flex = `1 1 ${500 / SIZE}px`;
     container.appendChild(element);
   }
+
+  let elements = document.querySelectorAll(".element");
+  elements.forEach((element) =>{
+    element.addEventListener("mouseover", (elem) => {
+      elem.currentTarget.classList.toggle("hover");
+    });
+    element.addEventListener("mouseout", (elem) => {
+      elem.currentTarget.classList.toggle("hover");
+    });
+    element.addEventListener("click",(elem) => {
+      elem.currentTarget.classList.toggle("selected");
+    })
+  }
+  );
 }
 
 main();
