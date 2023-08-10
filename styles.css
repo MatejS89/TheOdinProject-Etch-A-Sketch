@@ -44,7 +44,14 @@ body {
 }
 
 .slider-container {
+  margin: 10px 0;
   font-size: 2rem;
+  text-align: center;
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .draw-container {
