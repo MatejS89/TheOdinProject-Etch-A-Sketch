@@ -8,7 +8,7 @@ function createElements(size) {
   }
 }
 
-function createListeners() {
+function createListenersElements() {
   let elements = document.querySelectorAll(".element");
   elements.forEach((element) => {
     element.addEventListener("mouseover", (elem) => {
@@ -23,10 +23,30 @@ function createListeners() {
   });
 }
 
+function createNewBoard(size) {
+  let container = document.querySelector(".draw-container");
+  container.innerHTML = "";
+  createElements(size);
+  createListenersElements();
+}
+
+function addSliderListener() {
+  let slider = document.querySelector("#slider");
+  slider.addEventListener("change", () => {
+    const currVal = slider.value;
+    createNewBoard(currVal);
+  });
+  slider.addEventListener("input", () => {
+    const currVal = slider.value;
+    const display = document.querySelector("#rangeValue");
+    display.innerText = currVal;
+  });
+}
+
 function main() {
   const SIZE = 16;
-  createElements(SIZE);
-  createListeners();
+  createNewBoard(SIZE);
+  addSliderListener();
 }
 
 main();
