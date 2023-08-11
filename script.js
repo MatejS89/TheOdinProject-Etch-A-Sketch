@@ -1,7 +1,9 @@
 let isDrawing = false;
 let selectedColor = "#000000";
-let backgroundColor = "#F9F9F9";
+let previousColor = selectedColor;
+let backgroundColor = "#f9f9f9";
 let currentSize = 16;
+
 function createElements() {
   let container = document.querySelector(".draw-container");
   for (let i = 0; i < currentSize ** 2; i++) {
@@ -77,7 +79,7 @@ function createColorPickerListener() {
   });
 }
 
-function createClearButtonListener () {
+function createClearButtonListener() {
   const clearButton = document.querySelector("#clear-button");
   clearButton.addEventListener("click", () => {
     clearButton.classList.toggle("toggled");
@@ -85,8 +87,23 @@ function createClearButtonListener () {
   });
 }
 
+function createEraserButtonListener() {
+  const eraserButton = document.querySelector("#eraser-button");
+  eraserButton.addEventListener("click", () => {
+    eraserButton.classList.toggle("toggled");
+    if (eraserButton.classList.contains("toggled")) {
+      previousColor = selectedColor;
+      selectedColor = backgroundColor;
+    }
+    else {
+      selectedColor = previousColor;
+    }
+  });
+}
+
 function createButtonListeners() {
   createClearButtonListener();
+  createEraserButtonListener();
 }
 
 function main() {
