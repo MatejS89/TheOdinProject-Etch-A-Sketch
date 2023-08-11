@@ -81,15 +81,18 @@ function createColorPickerListener() {
 
 function createClearButtonListener() {
   const clearButton = document.querySelector("#clear-button");
-  clearButton.addEventListener("click", () => {
+  clearButton.addEventListener("mousedown", () => {
     clearButton.classList.toggle("toggled");
     clearBoard();
   });
+  clearButton.addEventListener("mouseup", () => {
+    clearButton.classList.toggle("toggled");
+  })
 }
 
 function createEraserButtonListener() {
   const eraserButton = document.querySelector("#eraser-button");
-  eraserButton.addEventListener("click", () => {
+  eraserButton.addEventListener("mousedown", () => {
     eraserButton.classList.toggle("toggled");
     if (eraserButton.classList.contains("toggled")) {
       previousColor = selectedColor;
