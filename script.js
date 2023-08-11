@@ -87,6 +87,9 @@ function createClearButtonListener() {
   });
   clearButton.addEventListener("mouseup", () => {
     clearButton.classList.toggle("toggled");
+  });
+  clearButton.addEventListener("mouseout", () => {
+    clearButton.classList.remove("toggled");
   })
 }
 
