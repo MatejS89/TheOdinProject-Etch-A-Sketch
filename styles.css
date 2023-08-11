@@ -24,12 +24,12 @@ body {
 }
 
 .settings-container {
+  align-items: center;
   border-radius: 14px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin-right: 5rem;
-  align-items: center;
 }
 
 .settings-header {
@@ -40,12 +40,23 @@ body {
 }
 
 .settings {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 30px;
   justify-content: center;
   margin: auto;
-  gap: 100px;
+}
+
+.settings > button {
+  background-color: #f9f9f9;
+  border: 3px solid black;
+  border-radius: 7px;
+  padding: 10px 20px;
+}
+
+.settings > button.toggled {
+  background-color: #bebebe;
 }
 
 #rangeValue {
@@ -88,8 +99,8 @@ body {
 }
 
 .color-picker-button {
-  height: 60px;
-  width: 60px;
   background-color: black;
   border-radius: 20px;
+  height: 60px;
+  width: 60px;
 }
