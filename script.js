@@ -1,14 +1,23 @@
 let isDrawing = false;
 let selectedColor = "#000000";
 let backgroundColor = "#F9F9F9";
-function createElements(size) {
+let currentSize = 16;
+function createElements() {
   let container = document.querySelector(".draw-container");
-  for (let i = 0; i < size ** 2; i++) {
+  for (let i = 0; i < currentSize ** 2; i++) {
     let element = document.createElement("div");
     element.classList.add("element");
-    element.style.flex = `1 1 ${500 / size}px`;
+    element.style.flex = `1 1 ${500 / currentSize}px`;
+    element.style.backgroundColor = backgroundColor;
     container.appendChild(element);
   }
+}
+
+function clearBoard() {
+  let elements = document.querySelectorAll(".draw-container>.element");
+  elements.forEach(
+    (element) => (element.style.backgroundColor = backgroundColor)
+  );
 }
 
 function createListenersElements() {
@@ -28,7 +37,7 @@ function createListenersElements() {
   });
 }
 
-function createNewBoard(size) {
+function createNewBoard() {
   let container = document.querySelector(".draw-container");
   container.addEventListener("mouseup", () => {
     isDrawing = false;
@@ -37,15 +46,15 @@ function createNewBoard(size) {
     isDrawing = true;
   });
   container.innerHTML = "";
-  createElements(size);
+  createElements();
   createListenersElements();
 }
 
 function addSliderListener() {
   let slider = document.querySelector("#slider");
   slider.addEventListener("change", () => {
-    const currVal = slider.value;
-    createNewBoard(currVal);
+    currentSize = slider.value;
+    createNewBoard();
   });
   slider.addEventListener("input", () => {
     const currVal = slider.value;
@@ -56,23 +65,35 @@ function addSliderListener() {
 
 function createColorPickerListener() {
   const colorPickerTrigger = document.querySelector(".color-picker-button");
-  const colorPicker = document.getElementById('color-picker');
+  const colorPicker = document.getElementById("color-picker");
 
-  colorPickerTrigger.addEventListener('click', () => {
+  colorPickerTrigger.addEventListener("click", () => {
     colorPicker.click(); // Simulate a click on the hidden color picker input
   });
 
-  colorPicker.addEventListener('input', (event) => {
+  colorPicker.addEventListener("input", (event) => {
     selectedColor = event.target.value;
     colorPickerTrigger.style.backgroundColor = selectedColor;
   });
 }
 
+function createClearButtonListener () {
+  const clearButton = document.querySelector("#clear-button");
+  clearButton.addEventListener("click", () => {
+    clearButton.classList.toggle("toggled");
+    clearBoard();
+  });
+}
+
+function createButtonListeners() {
+  createClearButtonListener();
+}
+
 function main() {
-  const SIZE = 16;
-  createNewBoard(SIZE);
+  createNewBoard();
   addSliderListener();
   createColorPickerListener();
+  createButtonListeners();
 }
 
 main();
