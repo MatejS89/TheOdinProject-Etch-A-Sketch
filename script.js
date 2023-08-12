@@ -1,7 +1,6 @@
 let isDrawing = false;
 let selectedColor = "#000000";
 let previousColor = selectedColor;
-let backgroundColor = "#f9f9f9";
 let currentSize = 16;
 
 function createElements() {
@@ -10,46 +9,41 @@ function createElements() {
     let element = document.createElement("div");
     element.classList.add("element");
     element.style.flex = `1 1 ${500 / currentSize}px`;
-    element.style.backgroundColor = backgroundColor;
     container.appendChild(element);
   }
 }
 
 function clearBoard() {
   let elements = document.querySelectorAll(".draw-container>.element");
-  elements.forEach(
-    (element) => (element.style.backgroundColor = backgroundColor)
-  );
+  elements.forEach((element) => {
+    element.classList.remove("hover");
+    element.style.backgroundColor = "";
+  });
 }
 
-function createListenersElements() {
-  let elements = document.querySelectorAll(".element");
-  elements.forEach((element) => {
-    element.addEventListener("mouseover", (elem) => {
-      if (isDrawing) elem.currentTarget.style.backgroundColor = selectedColor;
-      else elem.currentTarget.classList.add("hover");
-    });
-    element.addEventListener("mouseout", (elem) => {
-      elem.currentTarget.classList.remove("hover");
-    });
-    element.addEventListener("mousedown", (elem) => {
-      elem.currentTarget.style.backgroundColor = selectedColor;
-      elem.currentTarget.classList.remove("hover");
-    });
+function createListenersElements(drawBoard) {
+  drawBoard.addEventListener("mouseover", (e) => {
+    if (isDrawing) e.target.style.backgroundColor = selectedColor;
+    else e.target.classList.add("hover");
   });
+  drawBoard.addEventListener("mouseout", (e) => {
+    e.target.classList.remove("hover");
+  });
+  drawBoard.addEventListener("mouseup", () => {
+    isDrawing = false;
+  });
+  drawBoard.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    e.target.style.backgroundColor = selectedColor;
+  });
+  drawBoard.addEventListener("mouseleave", () => (isDrawing = false));
 }
 
 function createNewBoard() {
-  let container = document.querySelector(".draw-container");
-  container.addEventListener("mouseup", () => {
-    isDrawing = false;
-  });
-  container.addEventListener("mousedown", () => {
-    isDrawing = true;
-  });
-  container.innerHTML = "";
+  let drawBoard = document.querySelector(".draw-container");
+  drawBoard.innerHTML = "";
   createElements();
-  createListenersElements();
+  createListenersElements(drawBoard);
 }
 
 function addSliderListener() {
@@ -70,7 +64,7 @@ function createColorPickerListener() {
   const colorPicker = document.getElementById("color-picker");
 
   colorPickerTrigger.addEventListener("click", () => {
-    colorPicker.click(); // Simulate a click on the hidden color picker input
+    colorPicker.click();
   });
 
   colorPicker.addEventListener("input", (event) => {
@@ -90,7 +84,7 @@ function createClearButtonListener() {
   });
   clearButton.addEventListener("mouseout", () => {
     clearButton.classList.remove("toggled");
-  })
+  });
 }
 
 function createEraserButtonListener() {
@@ -99,9 +93,8 @@ function createEraserButtonListener() {
     eraserButton.classList.toggle("toggled");
     if (eraserButton.classList.contains("toggled")) {
       previousColor = selectedColor;
-      selectedColor = backgroundColor;
-    }
-    else {
+      selectedColor = "#ffffff";
+    } else {
       selectedColor = previousColor;
     }
   });
